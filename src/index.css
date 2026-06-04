@@ -1,7 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --font-base-neue-trial: 'Base Neue Trial', sans-serif;
+  /* Fonts */
+  --font-base-neue-trial: "Base Neue Trial", sans-serif;
+
+  /* Brand */
+  --color-primary: #F8FFD8;
+  --color-primary-foreground: #192F1A;
+
+  --color-secondary: #192F1A;
+  --color-secondary-foreground: #F8FFD8;
+
+  /* Backgrounds */
+  --color-background: #F2F8D0; /* variant of primary */
+  --color-surface: #F8FFD8;
+  --color-card: #FCFFE9;
+
+  /* Text */
+  --color-text: #192F1A;
+  --color-text-muted: #5B6D5C;
+
+  /* Borders */
+  --color-border: #DDE6BF;
+
+  /* Accent */
+  --color-accent: #D8F08A;
+  --color-accent-foreground: #192F1A;
 }
 
 @font-face {
@@ -10,4 +34,16 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+.html {
+  background-color: var(--color-background);
+}
+
+@utility perspective-2000 {
+  perspective: 2000px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
 }
