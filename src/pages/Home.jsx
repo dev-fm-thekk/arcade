@@ -1,85 +1,69 @@
-import { motion as Motion } from "motion/react"
-import { NavLink } from "react-router-dom"
-import ScrambleText from "../components/ScrambleText"
+import { Link } from "react-router-dom";
+import ScrambleText from "../components/ScrambleText";
 
 export default function Home() {
-    const rects = [
-        { color: "#E07755", className: "inset-[0%]" },
-        { color: "#192F1A", className: "inset-[1.5%] md:inset-[2%]" },
-        { color: "#561E27", className: "inset-[3%] md:inset-[4%]" },
-        { color: "#D8F08A", className: "inset-[4.5%] md:inset-[6%]" },
-        { color: "#F8FFD8", className: "inset-[6%] md:inset-[8%]" }, // Primary Cream
-    ]
+  return (
+    <div className="flex flex-col items-center justify-center text-center w-full flex-1 min-h-full py-8">
+      <h1
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: "clamp(32px, 9vw, 72px)",
+          color: "#E07755",
+          lineHeight: 1.2,
+          textShadow: "0 0 20px #E07755aa",
+          margin: "0 0 20px 0",
+        }}
+      >
+        <ScrambleText text="ARCADE" />
+      </h1>
+      <p
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: "clamp(12px, 3vw, 20px)",
+          color: "#4ade80",
+          letterSpacing: 3,
+          textShadow: "0 0 10px #4ade8066",
+          margin: "8px 0 24px 0",
+        }}
+      >
+        LEARN. PLAY. BUILD.
+      </p>
 
-    const navLinks = [
-        { to: "/about", label: "About", color: "#E07755" },
-        { to: "/explore", label: "Explore", color: "#192F1A" },
-        { to: "/projects", label: "Projects", color: "#561E27" },
-    ]
+      <div
+        style={{
+          width: "60%",
+          height: 2,
+          background: "linear-gradient(90deg, transparent, #E0775566, transparent)",
+          margin: "12px 0 24px 0",
+        }}
+      />
 
-    return (
-        <div className="relative w-full h-dvh overflow-hidden flex items-center justify-center bg-[#E07755]">
-            {/* Concentric Rectangles that stay */}
-            {rects.map((rect, i) => (
-                <Motion.div
-                    key={i}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{
-                        duration: 1,
-                        delay: i * 0.1,
-                        ease: [0.22, 1, 0.36, 1]
-                    }}
-                    className={`absolute shadow-xl md:shadow-2xl ${rect.className}`}
-                    style={{ 
-                        backgroundColor: rect.color,
-                        zIndex: i
-                    }}
-                />
-            ))}
+      <p
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: "clamp(10px, 2.5vw, 16px)",
+          color: "#c8d880",
+          lineHeight: 2.2,
+          margin: "12px 0 32px 0",
+          textShadow: "0 0 8px #c8d88066",
+        }}
+      >
+        A PLATFORM WHERE LEARNING
+        <br />
+        MEETS GAMING
+      </p>
 
-            {/* Content Overlay */}
-            <Motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.8 }}
-                className="relative z-10 flex flex-col items-center gap-6 md:gap-12 px-6 text-center"
-            >
-                <div className="space-y-2">
-                    <h1 className="font-base-neue-trial text-6xl md:text-9xl lg:text-[12rem] text-[#192F1A] leading-none tracking-tighter">
-                        <ScrambleText text="ARCADE" />
-                    </h1>
-                </div>
-
-                <div className="max-w-2xl space-y-4 md:space-y-6">
-                    <p className="text-lg md:text-3xl text-[#192F1A] font-bold leading-tight">
-                        A platform where learning meets gaming.
-                    </p>
-                    <p className="text-sm md:text-lg text-[#561E27] font-medium opacity-90">
-                        Learn tech by playing games. It's free and open-source.
-                    </p>
-                    
-                    {/* Integrated Navigation Links */}
-                    <div className="flex flex-wrap justify-center gap-3 md:gap-4 pt-4 md:pt-6">
-                        {navLinks.map((link) => (
-                            <NavLink
-                                key={link.to}
-                                to={link.to}
-                                className="px-5 py-2 md:px-6 md:py-3 rounded-xl font-bold text-primary transition-all hover:scale-110 hover:shadow-lg active:scale-95 text-sm md:text-base"
-                                style={{ backgroundColor: link.color }}
-                            >
-                                {link.label}
-                            </NavLink>
-                        ))}
-                    </div>
-
-                    <div className="pt-4 md:pt-8">
-                        <p className="text-[9px] md:text-xs text-[#192F1A] uppercase tracking-[0.3em] md:tracking-[0.4em] font-black opacity-70">
-                            Developed by Tinkerhub SCTCE
-                        </p>
-                    </div>
-                </div>
-            </Motion.div>
-        </div>
-    )
+      <Link
+        to="/explore"
+        className="bg-[#E07755] hover:bg-[#ff8f66] text-[#1a1208] font-bold px-8 py-4 rounded active:translate-y-0.5 transition-all no-underline"
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: "clamp(10px, 2.5vw, 16px)",
+          boxShadow: "0 4px 0 #8a3e2a",
+        }}
+      >
+        START GAME
+      </Link>
+    </div>
+  );
 }

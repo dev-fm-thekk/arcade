@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "Git Block",
+        "description": "A story based game for learning git fundementals.",
+        "url": "https://gitblock.arcade.com",
+        "highScore": 2048
+    },
+    {
+        "id": 2,
+        "name": "Git Block",
+        "description": "A story based game for learning git fundementals.",
+        "url": "https://gitblock.arcade.com",
+        "highScore": 2048
+
+    },
+    {
+        "id": 3,
+        "name": "Git Block",
+        "description": "A story based game for learning git fundementals.",
+        "url": "https://gitblock.arcade.com",
+        "highScore": 2048
+    }
+]
