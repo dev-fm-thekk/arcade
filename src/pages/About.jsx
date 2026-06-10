@@ -1,123 +1,102 @@
-import { motion as Motion } from "motion/react"
-
-const Section = ({ title, children, delay = 0, color = "#192F1A" }) => (
-  <Motion.section
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay }}
-    className="w-full max-w-4xl mb-12 md:mb-16 px-4 md:px-0"
-  >
-    <h2 className="text-3xl md:text-5xl font-base-neue-trial mb-4 md:mb-6" style={{ color }}>
+const Section = ({ title, children, color = "#192F1A" }) => (
+  <div className="mb-16 flex flex-col items-center">
+    <h2 className="font-bold mb-6 uppercase text-center" style={{ color, fontSize: "clamp(16px, 3.5vw, 20px)", letterSpacing: "2px" }}>
       {title}
     </h2>
-    <div className="text-base md:text-xl text-text leading-relaxed space-y-3 md:space-y-4">
+    <div className="leading-relaxed text-center max-w-2xl" style={{ fontSize: "clamp(12px, 2.2vw, 15px)", color: "#c8d880" }}>
       {children}
     </div>
-  </Motion.section>
-)
+  </div>
+);
+
+const CoreAvatar = ({ name, role, color = "#E07755" }) => {
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  return (
+    <div className="flex flex-col items-center text-center gap-4 group">
+      <div 
+        className="w-20 h-20 rounded-2xl flex items-center justify-center border-2 transition-transform group-hover:scale-105"
+        style={{ 
+          backgroundColor: `${color}22`, 
+          borderColor: color,
+          boxShadow: `0 0 20px ${color}33`
+        }}
+      >
+        <span style={{ color, fontSize: '24px', fontWeight: 'bold' }}>{initials}</span>
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <span className="font-bold whitespace-nowrap" style={{ color: "#f3f4f6", fontSize: '13px' }}>{name}</span>
+        <span style={{ color: "#8a7a60", fontSize: '11px' }}>{role}</span>
+      </div>
+    </div>
+  );
+};
+
+const ContributorAvatar = ({ name, color = "#4ade80" }) => {
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  return (
+    <div 
+      title={name}
+      className="w-11 h-11 rounded-md flex items-center justify-center border transition-all hover:border-[#4ade80] hover:scale-110 cursor-help"
+      style={{ 
+        backgroundColor: "#1a1a1a", 
+        borderColor: "#2e2010"
+      }}
+    >
+      <span style={{ color: "#4ade80", fontSize: '13px', fontWeight: 'bold', opacity: 0.8 }}>{initials}</span>
+    </div>
+  );
+};
 
 export default function About() {
-  const team = [
-    { role: "Campus Lead", name: "Kevin L", color: "#E07755" },
-    { role: "Learning Coordinator", name: "Keshav", color: "#192F1A" },
-    { role: "Women in Tech", name: "Bhargavi", color: "#561E27" },
-    { role: "Outreach", name: "Sreenanthan", color: "#D8F08A" },
-  ]
+  const coreTeam = [
+    { name: "Alex Rivera", role: "Lead Dev", color: "#E07755" },
+    { name: "Sarah Chen", role: "UI/UX", color: "#4ade80" },
+    { name: "Marcus Koh", role: "Hardware", color: "#561E27" },
+  ];
 
   const contributors = [
-    "Abhiram A R", "Abhiram A P", "Pranav PP", "Sreenanthan", "..."
-  ]
+    { name: "Elena Belova" },
+    { name: "Jordan Smith" },
+    { name: "A. Kumar" },
+    { name: "Li Wei" },
+    { name: "J. Doe" },
+    { name: "S. Miller" },
+    { name: "B. Wilson" },
+    { name: "K. Gupta" },
+  ];
 
   return (
-    <div className="w-full min-h-screen bg-[#F8FFD8] pt-20 md:pt-24 pb-12 md:pb-16 flex flex-col items-center">
-      {/* Hero Section */}
-      <Motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-16 md:mb-24 px-6"
+    <div className="text-center w-full pr-2 pb-20 flex flex-col items-center">
+      <h1
+        className="mb-12 pb-4 border-b-2 border-[#E07755] sticky top-0 bg-[#0a0d04] z-10 w-full text-center"
+        style={{ color: "#E07755", fontSize: "clamp(24px, 5vw, 32px)" }}
       >
-        <h1 className="text-5xl md:text-9xl font-base-neue-trial text-[#192F1A] mb-4">
-          ABOUT
-        </h1>
-        <p className="text-lg md:text-2xl text-[#561E27] font-bold max-w-2xl mx-auto">
-          Where learning meets gaming.
-        </p>
-      </Motion.div>
+        ABOUT US
+      </h1>
 
-      {/* About Us */}
-      <Section title="About Us" delay={0.2} color="#E07755">
-        <p>
-          Arcade is a passion project born out of the idea that technical education 
-          should be as engaging as playing your favorite video game.
-        </p>
-        <p>
-          We combine interactive simulations with core CS concepts to create a 
-          learning environment that sticks.
-        </p>
+      <Section title="MISSION" color="#E07755">
+        <p>Arcade makes technical education as engaging as gaming. Our platform bridges the gap between learning and play, creating an immersive environment for the next generation of builders.</p>
       </Section>
 
-      {/* Tinkerhub SCTCE */}
-      <Section title="Tinkerhub SCTCE" delay={0.3} color="#192F1A">
-        <p>
-          Tinkerhub is a non-profit organisation. 
-          We are the student branch of Tinkerhub at SCTCE. 
-          We believe learning should be free and accessible to everyone. 
-        </p>
-        <p>
-          We also believe learning should be fun—so hence, Arcade.
-        </p>
-      </Section>
-
-      {/* Our Team */}
-      <Section title="Our Team" delay={0.4} color="#561E27">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {team.map((member, i) => (
-            <Motion.div 
-              key={member.role}
-              whileHover={{ scale: 1.02 }}
-              className="p-5 md:p-6 rounded-3xl flex flex-row items-center gap-4 md:gap-6 shadow-sm border border-black/5"
-              style={{ backgroundColor: member.color, color: i === 3 ? "#192F1A" : "#F8FFD8" }}
-            >
-              {/* Profile Pic Placeholder */}
-              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-black/10 flex-shrink-0 flex items-center justify-center overflow-hidden border border-white/10">
-                <svg className="w-10 h-10 md:w-12 md:h-12 opacity-40" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-              </div>
-              <div className="flex flex-col min-w-0">
-                <span className="text-[10px] md:text-sm uppercase tracking-widest font-black opacity-80 mb-1 truncate">
-                  {member.role}
-                </span>
-                <span className="text-xl md:text-3xl font-bold leading-tight">
-                  {member.name}
-                </span>
-              </div>
-            </Motion.div>
+      <Section title="CORE TEAM" color="#E07755">
+        <div className="flex flex-row flex-wrap gap-12 justify-center items-start">
+          {coreTeam.map((member, i) => (
+            <CoreAvatar key={i} {...member} />
           ))}
         </div>
       </Section>
 
-      {/* Contributors */}
-      <Section title="Contributors" delay={0.5} color="#D8F08A">
-        <div className="flex flex-wrap gap-4">
-          {contributors.map((name) => (
-            <div 
-              key={name}
-              className="flex items-center gap-2 pl-1 pr-4 py-1 bg-white/50 border border-black/10 rounded-full text-sm md:text-base font-medium text-[#192F1A]"
-            >
-              {/* Avatar Placeholder */}
-              <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center overflow-hidden">
-                <svg className="w-5 h-5 opacity-40" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
-              </div>
-              <span>{name}</span>
-            </div>
+      <Section title="CONTRIBUTORS" color="#4ade80">
+        <div className="flex flex-wrap gap-4 justify-center">
+          {contributors.map((member, i) => (
+            <ContributorAvatar key={i} {...member} />
           ))}
         </div>
+      </Section>
+
+      <Section title="TINKERHUB SCTCE" color="#4ade80">
+        <p>Student branch dedicated to free, accessible learning. Fostering a community where students can experiment, build, and grow together through peer-to-peer mentorship and hands-on projects.</p>
       </Section>
     </div>
-  )
+  );
 }

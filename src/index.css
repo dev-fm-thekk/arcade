@@ -36,7 +36,14 @@
   font-display: swap;
 }
 
-.html {
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
   background-color: var(--color-background);
 }
 

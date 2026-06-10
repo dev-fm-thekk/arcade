@@ -9,8 +9,9 @@ export default function MainLayout() {
     <div className="min-h-dvh flex flex-col overflow-hidden bg-background">
       {!isHome && (
         <Motion.nav 
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
           className="fixed top-4 left-4 md:top-6 md:left-6 z-50"
         >
           <NavLink 
@@ -21,22 +22,18 @@ export default function MainLayout() {
           </NavLink>
         </Motion.nav>
       )}
-      <main className="flex-1 w-full relative perspective-2000">
+      <main className="flex-1 w-full relative">
         <AnimatePresence mode="popLayout" initial={false}>
           <Motion.div
             key={location.pathname}
-            initial={isHome 
-              ? { opacity: 0 } 
-              : { x: "100%", rotateY: -45, opacity: 0, transformOrigin: "right" }
-            }
-            animate={{ x: 0, rotateY: 0, opacity: 1 }}
-            exit={{ x: "-120%", rotateY: 45, opacity: 0, transformOrigin: "left" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ 
-              duration: isHome ? 0.4 : 0.8, 
-              ease: [0.4, 0, 0.2, 1],
-              opacity: { duration: 0.4 }
+              duration: 0.3, 
+              ease: "easeInOut"
             }}
-            className="w-full h-full absolute inset-0 preserve-3d overflow-y-auto"
+            className="w-full h-full absolute inset-0 overflow-y-auto"
           >
             <Outlet />
           </Motion.div>

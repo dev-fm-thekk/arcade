@@ -1,40 +1,64 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+const POOLS = [
+  'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン',
+  'ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑᛒᛓ',
+  '⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻',
+  '░▒▓█▄▀▌▐■□▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕',
+  '∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳',
+  'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ',
+  'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω',
+];
 
-export default function ScrambleText({ text, className, speed = 80 }) {
-  const [displayText, setDisplayText] = useState(text);
-  const intervalId = useRef(null);
-  const progress = useRef(0);
+const cycleChar = (frame) => {
+  const pool = POOLS[frame % POOLS.length];
+  return pool[Math.floor(Math.random() * pool.length)];
+};
+
+export default function ScrambleText({ text, className, speed = 60 }) {
+  const [chars, setChars] = useState(() =>
+    text.split('').map(ch => ({ final: ch, display: ch === ' ' ? ' ' : cycleChar(0), locked: false }))
+  );
+  const frameRef = useRef(0);
+  const intervalRef = useRef(null);
+  const progressRef = useRef(0);
 
   const stop = useCallback(() => {
-    if (intervalId.current !== null) {
-      clearInterval(intervalId.current);
-      intervalId.current = null;
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
   }, []);
 
   const start = useCallback(() => {
     stop();
-    progress.current = 0;
+    progressRef.current = 0;
+    frameRef.current = 0;
 
-    intervalId.current = setInterval(() => {
-      const scrambled = text
-        .split('')
-        .map((char, i) =>
-          i < Math.floor(progress.current)
-            ? char
-            : CHARS[Math.floor(Math.random() * CHARS.length)]
-        )
-        .join('');
+    setChars(text.split('').map(ch => ({
+      final: ch,
+      display: ch === ' ' ? ' ' : cycleChar(0),
+      locked: false,
+    })));
 
-      setDisplayText(scrambled);
+    intervalRef.current = setInterval(() => {
+      frameRef.current += 1;
+      progressRef.current += 0.18;
+      const lockedUpTo = Math.floor(progressRef.current);
 
-      progress.current += 0.2; // Locks one character every 5 frames
+      setChars(text.split('').map((ch, i) => {
+        if (ch === ' ') return { final: ch, display: ' ', locked: true };
+        if (i < lockedUpTo) return { final: ch, display: ch, locked: true };
+        return {
+          final: ch,
+          display: cycleChar(frameRef.current + i),
+          locked: false,
+        };
+      }));
 
-      if (progress.current >= text.length) {
+      if (progressRef.current >= text.length) {
         stop();
-        setDisplayText(text);
+        setChars(text.split('').map(ch => ({ final: ch, display: ch, locked: true })));
       }
     }, speed);
   }, [text, speed, stop]);
@@ -43,11 +67,53 @@ export default function ScrambleText({ text, className, speed = 80 }) {
     start();
     return stop;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run once on mount
+  }, []);
 
   return (
-    <span className={className} style={{ display: 'inline-block' }}>
-      {displayText}
+    <span
+      className={className}
+      style={{ display: 'inline-block', fontVariantLigatures: 'none' }}
+      onMouseEnter={start}
+    >
+      {chars.map((c, i) => (
+        <span
+          key={i}
+          style={{
+            /*
+             * Every span is sized to the FINAL character width using a
+             * CSS trick: the locked char sits in normal flow; the unlocked
+             * char is absolute-positioned inside, so it never affects layout.
+             * This kills all horizontal jitter completely.
+             */
+            display: 'inline-block',
+            position: 'relative',
+            // Reserve the space of the real character at all times
+            width: c.final === ' ' ? '0.3em' : '1ch',
+          }}
+        >
+          {/* Ghost char — always in flow, always the final letter, invisible until locked */}
+          <span style={{ visibility: 'hidden', userSelect: 'none' }}>
+            {c.final}
+          </span>
+
+          {/* Visible char — absolutely positioned so it never shifts layout */}
+          <span
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: c.locked ? 'inherit' : "'Courier New', 'Lucida Console', monospace",
+              fontSize: 'inherit',           // NO random font size — that was causing the jerk
+              opacity: c.locked ? 1 : 0.6,
+              transition: c.locked ? 'opacity 0.08s' : 'none',
+            }}
+          >
+            {c.display}
+          </span>
+        </span>
+      ))}
     </span>
   );
 }
