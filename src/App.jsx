@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Explore from "./pages/Explore";
 import BlankPage from "./pages/Blank";
+import LeaderboardLayout from "./layouts/Leaderboard";
 
 function App() {
 
@@ -19,8 +20,8 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="explore" element={<Explore />} />
           <Route path="game/:id" element={<GameLayout />} />
+          <Route path="game/:id/leaderboard" element={<LeaderboardLayout />} />
         </Route>
-        <Route path="/blank" element={<BlankPage />} />
       </Routes>
     </>
   );
