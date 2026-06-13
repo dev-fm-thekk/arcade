@@ -74,22 +74,25 @@ export default function ArcadeLayout() {
   useEffect(() => {
     const handleFirstInteraction = () => {
       if (audioRef.current && !isPlaying) {
-        audioRef.current.play().then(() => {
-          setIsPlaying(true);
-        }).catch(error => {
-          console.log("Autoplay prevented on first interaction:", error);
-        });
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch((error) => {
+            console.log("Autoplay prevented on first interaction:", error);
+          });
       }
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('keydown', handleFirstInteraction);
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
     };
 
-    document.addEventListener('click', handleFirstInteraction);
-    document.addEventListener('keydown', handleFirstInteraction);
+    document.addEventListener("click", handleFirstInteraction);
+    document.addEventListener("keydown", handleFirstInteraction);
 
     return () => {
-      document.removeEventListener('click', handleFirstInteraction);
-      document.removeEventListener('keydown', handleFirstInteraction);
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
     };
   }, [isPlaying]);
 
@@ -114,8 +117,6 @@ export default function ArcadeLayout() {
       // Audio blocked
     }
   };
-
-
 
   const playClickSound = () => playBeep(600, 0.05, "triangle");
 
@@ -174,7 +175,14 @@ export default function ArcadeLayout() {
               <span
                 className={`inline-block w-1.5 h-1.5 rounded-full ${scanlinesActive ? "bg-green-500" : "bg-red-500"} animate-pulse`}
               />
-              <span style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', letterSpacing: 'clamp(1px, 0.2vw, 2px)' }}>SCANLINES</span>
+              <span
+                style={{
+                  fontSize: "clamp(6px, 1.5vw, 8px)",
+                  letterSpacing: "clamp(1px, 0.2vw, 2px)",
+                }}
+              >
+                SCANLINES
+              </span>
               <button
                 type="button"
                 onClick={() => setScanlinesActive(!scanlinesActive)}
@@ -184,7 +192,6 @@ export default function ArcadeLayout() {
               </button>
             </div>
             <div className="flex items-center gap-2">
-
               <button
                 type="button"
                 onClick={() => setSoundMuted(!soundMuted)}
@@ -192,7 +199,14 @@ export default function ArcadeLayout() {
               >
                 <VolumeIcon muted={soundMuted} />
               </button>
-              <span style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', letterSpacing: 'clamp(1px, 0.2vw, 2px)' }}>NOW PLAYING: {activeRoute}</span>
+              <span
+                style={{
+                  fontSize: "clamp(6px, 1.5vw, 8px)",
+                  letterSpacing: "clamp(1px, 0.2vw, 2px)",
+                }}
+              >
+                NOW PLAYING: {activeRoute}
+              </span>
             </div>
           </div>
 
@@ -223,9 +237,9 @@ export default function ArcadeLayout() {
               className="text-center m-0"
               style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: 'clamp(8px, 2vw, 11px)',
+                fontSize: "clamp(8px, 2vw, 11px)",
                 color: "#E07755",
-                letterSpacing: 'clamp(1px, 0.5vw, 3px)',
+                letterSpacing: "clamp(1px, 0.5vw, 3px)",
                 textShadow: "0 0 10px #E07755aa",
               }}
             >
@@ -281,9 +295,9 @@ export default function ArcadeLayout() {
                 >
                   <span
                     style={{
-                      fontSize: 'clamp(7px, 1.8vw, 8px)',
+                      fontSize: "clamp(7px, 1.8vw, 8px)",
                       color: "#4ade80",
-                      letterSpacing: 'clamp(1px, 0.4vw, 2px)',
+                      letterSpacing: "clamp(1px, 0.4vw, 2px)",
                       textShadow: "0 0 6px #4ade8066",
                     }}
                   >
@@ -291,9 +305,9 @@ export default function ArcadeLayout() {
                   </span>
                   <span
                     style={{
-                      fontSize: 'clamp(7px, 1.8vw, 8px)',
+                      fontSize: "clamp(7px, 1.8vw, 8px)",
                       color: "#E07755",
-                      letterSpacing: 'clamp(0.5px, 0.2vw, 1px)',
+                      letterSpacing: "clamp(0.5px, 0.2vw, 1px)",
                       textShadow: "0 0 6px #E0775566",
                     }}
                   >
@@ -301,9 +315,9 @@ export default function ArcadeLayout() {
                   </span>
                   <span
                     style={{
-                      fontSize: 'clamp(7px, 1.8vw, 8px)',
+                      fontSize: "clamp(7px, 1.8vw, 8px)",
                       color: "#4ade80",
-                      letterSpacing: 'clamp(1px, 0.4vw, 2px)',
+                      letterSpacing: "clamp(1px, 0.4vw, 2px)",
                       textShadow: "0 0 6px #4ade8066",
                     }}
                   >
@@ -332,9 +346,9 @@ export default function ArcadeLayout() {
                   className="cab-blink z-20 shrink-0 text-center"
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
-                    fontSize: 'clamp(8px, 1.8vw, 9px)',
+                    fontSize: "clamp(8px, 1.8vw, 9px)",
                     color: "#E07755",
-                    letterSpacing: 'clamp(1px, 0.4vw, 2px)',
+                    letterSpacing: "clamp(1px, 0.4vw, 2px)",
                     textShadow: "0 0 8px #E07755",
                     margin: 0,
                   }}
@@ -350,7 +364,7 @@ export default function ArcadeLayout() {
               style={{
                 background: "#130e06",
                 borderRadius: 12,
-                padding: "clamp(16px, 3vw, 28px) clamp(20px, 4vw, 48px)",
+                padding: "clamp(10px, 3vw, 28px) clamp(10px, 4vw, 48px)",
                 margin: "0 -4px",
                 border: "2px solid #221708",
               }}
@@ -359,18 +373,15 @@ export default function ArcadeLayout() {
                 className="text-center mb-6"
                 style={{
                   fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(7px, 1.8vw, 8px)',
+                  fontSize: "clamp(7px, 1.8vw, 8px)",
                   color: "#8a7050",
-                  letterSpacing: 'clamp(0.5px, 0.2vw, 1px)',
+                  letterSpacing: "clamp(0.5px, 0.2vw, 1px)",
                 }}
               >
                 SELECT PAGE — PRESS A BUTTON
               </p>
 
-              <div
-                className="flex items-end justify-center flex-wrap"
-                style={{ gap: "clamp(16px, 4vw, 40px)", marginBottom: 20 }}
-              >
+              <div className="flex items-end justify-center w-[20em] mb-4 md:w-[30em] mx-auto">
                 {NAV_LINKS.map((link) => (
                   <NavButton
                     key={link.to}
@@ -384,54 +395,6 @@ export default function ArcadeLayout() {
                     onNavigate={handleNavigate}
                   />
                 ))}
-              </div>
-
-              {/* Coin slot row */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 32,
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={insertCoin}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: 5,
-                    padding: "6px 14px",
-                  }}
-                  className="active:scale-95 transition-all duration-75"
-                >
-                  <div
-                    style={{
-                      width: 'clamp(30px, 8vw, 44px)',
-                      height: 'clamp(3px, 1vw, 5px)',
-                      borderRadius: 3,
-                      border: "1px solid #2e2010",
-                      background:
-                        "repeating-linear-gradient(90deg, #0f0a04 0, #0f0a04 3px, #1a1208 3px, #1a1208 6px)",
-                      boxShadow: "inset 0 2px 3px rgba(0,0,0,0.9)",
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: "'Press Start 2P', monospace",
-                      fontSize: 'clamp(6px, 1.6vw, 7px)',
-                      color: "#8a7050",
-                      letterSpacing: 'clamp(0.5px, 0.2vw, 1px)',
-                    }}
-                  >
-                    {coins > 0 ? `COINS: ${coins}` : "INSERT COIN"}
-                  </span>
-                </button>
               </div>
             </div>
           </div>
@@ -452,22 +415,12 @@ export default function ArcadeLayout() {
             <span
               style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: 'clamp(6px, 1.6vw, 7px)',
+                fontSize: "clamp(6px, 1.6vw, 7px)",
                 color: "#3a2a10",
-                letterSpacing: 'clamp(1px, 0.4vw, 2px)',
+                letterSpacing: "clamp(1px, 0.4vw, 2px)",
               }}
             >
               TINKERHUB SCTCE
-            </span>
-            <span
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: 'clamp(6px, 1.6vw, 7px)',
-                color: "#561E27",
-                textShadow: '0 0 clamp(3px, 0.8vw, 6px) #561E27',
-              }}
-            >
-              ★ {coins} CREDITS
             </span>
           </div>
         </div>

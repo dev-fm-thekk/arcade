@@ -3,7 +3,7 @@ import ScrambleText from "../components/ScrambleText";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center text-center w-full flex-1 min-h-full py-8">
+    <div className="flex flex-col items-center justify-center text-center w-full flex-1 py-4 md:py-8">
       <h1
         style={{
           fontFamily: "'Press Start 2P', monospace",
