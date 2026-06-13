@@ -6,7 +6,7 @@ export default function Projects() {
   ];
 
   return (
-    <div className="w-full text-left">
+    <div className="w-full text-left" style={{ fontFamily: "'Press Start 2P', monospace"}}>
       <h1
         className="mb-4 pb-2 border-b-2 border-[#e06070]"
         style={{ color: "#e06070", fontSize: "clamp(14px, 3vw, 20px)", textShadow: "0 0 8px #ff4466" }}

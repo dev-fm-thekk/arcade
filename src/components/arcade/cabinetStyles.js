@@ -48,24 +48,6 @@ export const CABINET_STYLES = `
   .arcade-screen-content {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    font-family: 'Press Start 2P', monospace;
-    color: #f3f4f6;
-  }
-  .arcade-screen-content h1 {
-    font-size: clamp(14px, 3vw, 22px);
-    color: #E07755;
-    text-shadow: 0 0 10px #E07755aa;
-    margin-bottom: 1rem;
-  }
-  .arcade-screen-content h2 {
-    font-size: clamp(10px, 2vw, 14px);
-    margin-bottom: 0.5rem;
-  }
-  .arcade-screen-content p,
-  .arcade-screen-content li {
-    font-size: clamp(8px, 1.6vw, 11px);
-    line-height: 1.8;
-    color: #c8d880;
   }
 `;
 

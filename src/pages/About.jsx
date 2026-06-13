@@ -1,9 +1,9 @@
 const Section = ({ title, children, color = "#192F1A" }) => (
   <div className="mb-16 flex flex-col items-center">
-    <h2 className="font-bold mb-6 uppercase text-center" style={{ color, fontSize: "clamp(16px, 3.5vw, 20px)", letterSpacing: "2px" }}>
+    <h2 className="font-bold mb-6 uppercase text-center text-lg md:text-xl" style={{ color, letterSpacing: "2px" }}>
       {title}
     </h2>
-    <div className="leading-relaxed text-center max-w-2xl" style={{ fontSize: "clamp(12px, 2.2vw, 15px)", color: "#c8d880" }}>
+    <div className="text-center max-w-2xl text-md" style={{ color: "#c8d880" }}>
       {children}
     </div>
   </div>
@@ -66,10 +66,9 @@ export default function About() {
   ];
 
   return (
-    <div className="text-center w-full pr-2 pb-20 flex flex-col items-center">
+    <div className="text-center w-full pr-2 pb-20 flex flex-col items-center" style={{ fontFamily: "'Press Start 2P', monospace" }}>
       <h1
-        className="mb-12 pb-4 border-b-2 border-[#E07755] sticky top-0 bg-[#0a0d04] z-10 w-full text-center"
-        style={{ color: "#E07755", fontSize: "clamp(24px, 5vw, 32px)" }}
+        className="mb-12 pb-4 border-b-2 border-[#E07755] sticky top-0 bg-[#0a0d04] z-10 w-full text-center text-xl md:text-2xl"
       >
         ABOUT US
       </h1>

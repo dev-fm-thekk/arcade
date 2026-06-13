@@ -3,6 +3,7 @@ export default {
     extend: {
       fontFamily: {
         'base-neue-trial': ['"Base Neue Trial"'],
+        'press-start': ['"Press Start 2P"', 'cursive'],
       },
     },
   },
