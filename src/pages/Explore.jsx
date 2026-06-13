@@ -3,7 +3,7 @@ import games from "../data/games.json";
 
 export default function Explore() {
   return (
-    <div className="w-full text-left">
+    <div className="w-full text-left" style={{ fontFamily: "'Press Start 2P', monospace"}}>
       <h1
         className="mb-4 pb-2 border-b-2 border-[#4ade80]"
         style={{ color: "#4ade80", fontSize: "clamp(14px, 3vw, 20px)" }}

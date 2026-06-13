@@ -326,7 +326,7 @@ export default function ArcadeLayout() {
                 </div>
 
                 {/* Page content viewport */}
-                <div className="w-full flex-1 z-20 overflow-y-auto min-h-0 pr-1 arcade-screen-content flex flex-col">
+                <div className="w-full flex-1 z-20 overflow-y-auto min-h-0 pr-1 arcade-screen-content flex flex-col font-press-start text-gray-100">
                   <AnimatePresence mode="wait" initial={false}>
                     <Motion.div
                       key={location.pathname}
